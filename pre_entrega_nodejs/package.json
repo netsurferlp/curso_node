@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0"
+  "author": "Pessolano Gaston",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
+  "type": "module"
 }
