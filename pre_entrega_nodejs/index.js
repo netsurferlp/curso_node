@@ -41,12 +41,25 @@ if (endpoint.startsWith("products/")) {
 
 const parts = endpoint.split("/");
 resource = parts[0];
-id = parts[1];
+id = Number(parts[1]); // Convertimos el ID a número para validarlo correctamente
+
+if (id.isInteger && id > 0) {
+  console.log(chalk.green(`✅ ID válido: ${id}`));
+console.log(chalk.green(`✅  Recurso: ${resource}`));
+
+console.log("");
 
 
-console.log(chalk.blue(`Resource: ${resource}`));
-console.log(chalk.blue(`ID: ${id}`));
+
+
+} 
+else {
+  console.log(chalk.red(`❌ ID inválido: ${id}. El ID debe ser un número entero positivo.`));
+  process.exit(1); // Salimos del programa con un código de error
 }
+
+}
+
 // Si el endpoint comienza con "products/", separamos el recurso y el ID para las operaciones que requieren un ID específico (GET, PUT, DELETE).
 
 
@@ -54,37 +67,37 @@ console.log(chalk.blue(`ID: ${id}`));
 switch (method) {
   case "GET":
     // Para las solicitudes GET, verificamos si el endpoint es "products" para obtener todos los productos o si incluye un ID para obtener un producto específico.
-    console.log("Handling GET request");
+    console.log("Procesando solicitud GET...");
     if (endpoint === "products") {
-      console.log("Fetching all products...");
+      console.log("Obteniendo todos los productos...");
       try {
         const response = await fetch("https://fakestoreapi.com/products");
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error al obtener los productos:", error);
       }
     }
     
 else if (id != undefined && id != '' )  {
-  console.log(`Fetching product with ID: ${id}...`);
+  console.log(`Obteniendo producto con ID: ${id}...`);
     try {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`);
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.error(`Error fetching product with ID ${id}:`, error);
+        console.error(`Error al obtener producto con ID ${id}:`, error);
       }
 }   
      else {
-      console.log("Unknown endpoint");
+      console.log("Endpoint desconocido");
     }
 
     break;
 
   case "POST":
     // Para las solicitudes POST, verificamos que el endpoint sea "products" para crear un nuevo producto utilizando los datos proporcionados en los argumentos.
-    console.log("Handling POST request");
+    console.log("Procesando solicitud POST...");
     try {
         const response = await fetch("https://fakestoreapi.com/products", {
           method: "POST",
@@ -96,7 +109,7 @@ else if (id != undefined && id != '' )  {
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.error("Error creating product:", error);
+        console.error("Error al crear producto:", error);
       } 
 
 
@@ -104,9 +117,9 @@ else if (id != undefined && id != '' )  {
 
   case "PUT":
     // Para las solicitudes PUT, verificamos que el endpoint incluya un ID para actualizar un producto específico utilizando los datos proporcionados en los argumentos.
-    console.log("Handling PUT request");
+    console.log("Procesando solicitud PUT...");
     if (id != undefined && id != '') {
-      console.log(`Updating product with ID: ${id}...`);
+      console.log(`Actualizando producto con ID: ${id}...`);
     try {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
           method: "PUT",
@@ -118,16 +131,16 @@ else if (id != undefined && id != '' )  {
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.error(`Error updating product with ID ${id}:`, error);
+        console.error(`Error al actualizar producto con ID ${id}:`, error);
       }
     }
     break;
 
   case "DELETE":
     // Para las solicitudes DELETE, verificamos que el endpoint incluya un ID para eliminar un producto específico.
-    console.log("Handling DELETE request");
+    console.log("Procesando solicitud DELETE...");
     if (id != undefined && id != '') {
-      console.log(`Deleting product with ID: ${id}...`);
+      console.log(`Eliminando producto con ID: ${id}...`);
     try {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
           method: "DELETE",
@@ -135,7 +148,7 @@ else if (id != undefined && id != '' )  {
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.error(`Error deleting product with ID ${id}:`, error);
+        console.error(`Error al eliminar producto con ID ${id}:`, error);
       }
     }
 
@@ -147,5 +160,5 @@ else if (id != undefined && id != '' )  {
 
   default:
     // Si el método HTTP no coincide con ninguno de los casos anteriores, mostramos un mensaje indicando que el método es desconocido.
-    console.log("Unknown method");
+    console.log("Método desconocido");
 }
