@@ -11,5 +11,8 @@
   "author": "Pessolano Gaston",
   "license": "MIT",
   "packageManager": "pnpm@10.33.0",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.6.2"
+  }
 }

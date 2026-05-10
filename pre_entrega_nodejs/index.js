@@ -1,31 +1,39 @@
-//console.log(process.argv);
-
-//const methodSinFiltro = process.argv[2];
-//const endpoint = process.argv[3];
-
+import chalk from 'chalk';
+// Importamos la librería chalk para mejorar la apariencia de los logs en la consola
+console.log(chalk.green("Iniciando la aplicación..."));
+console.log(chalk.blue("_____________________________________________________________"));
+console.log("");
+console.log(chalk.blue("ℹ️  Analizando entrada de la línea de comandos..."));
 const [,, methodUnChecked, endpointUnchecked,...args] = process.argv;
-
-console.log(`Method: ${methodUnChecked}`);
-console.log(`Endpoint: ${endpointUnchecked}`);
+console.log(chalk.blue(`ℹ️  Metodo HTTP Ingresado: ${methodUnChecked}`));
+console.log(chalk.blue(`ℹ️  Endpoint Ingresado: ${endpointUnchecked}`));
 
 let [title, price, category] = args;
 
-console.log(args);
+console.log(chalk.blue(`ℹ️  Argumentos: ${args}`));
+// Desestructuramos los argumentos adicionales para obtener el título, precio y categoría del producto para las operaciones POST y PUT.
+
+console.log("");
+//Capturamos los argumentos de la linea de comandos, el método HTTP, el endpoint y los argumentos adicionales (title, price, category)
+
+
+let method = methodUnChecked.toUpperCase();
+let endpoint = endpointUnchecked.toLowerCase();
+
+console.log(chalk.green`✅ Metodo HTTP (normalizado): ${method}`);
+console.log(chalk.green`✅ Endpoint (normalizado): ${endpoint}`);
+
+
+//Sanitizamos el método y el endpoint para evitar problemas de mayúsculas/minúsculas
+
+
 
 const product = {
   title, // Equivale a title: title
   price: Number(price), // IMPORTANTE: convertir a número ya que process.argv siempre trae strings [3, 4]
   category
 };
-
-
-
-let method = methodUnChecked.toUpperCase();
-let endpoint = endpointUnchecked.toLowerCase();
-
-console.log(`Method (normalized): ${method}`);
-console.log(`Endpoint (normalized): ${endpoint}`);
-
+// Creamos un objeto product con los datos proporcionados, asegurándonos de convertir el precio a un número.
 
 let id;
 let resource;
@@ -36,18 +44,16 @@ resource = parts[0];
 id = parts[1];
 
 
-console.log(`Resource: ${resource}`);
-console.log(`ID: ${id}`);
-
-
-
-
-
+console.log(chalk.blue(`Resource: ${resource}`));
+console.log(chalk.blue(`ID: ${id}`));
 }
+// Si el endpoint comienza con "products/", separamos el recurso y el ID para las operaciones que requieren un ID específico (GET, PUT, DELETE).
 
 
+// Ahora manejamos las diferentes operaciones según el método HTTP y el endpoint proporcionados. Utilizamos un switch para organizar el código de manera clara y legible.
 switch (method) {
   case "GET":
+    // Para las solicitudes GET, verificamos si el endpoint es "products" para obtener todos los productos o si incluye un ID para obtener un producto específico.
     console.log("Handling GET request");
     if (endpoint === "products") {
       console.log("Fetching all products...");
@@ -59,6 +65,7 @@ switch (method) {
         console.error("Error fetching products:", error);
       }
     }
+    
 else if (id != undefined && id != '' )  {
   console.log(`Fetching product with ID: ${id}...`);
     try {
@@ -76,6 +83,7 @@ else if (id != undefined && id != '' )  {
     break;
 
   case "POST":
+    // Para las solicitudes POST, verificamos que el endpoint sea "products" para crear un nuevo producto utilizando los datos proporcionados en los argumentos.
     console.log("Handling POST request");
     try {
         const response = await fetch("https://fakestoreapi.com/products", {
@@ -95,6 +103,7 @@ else if (id != undefined && id != '' )  {
     break;
 
   case "PUT":
+    // Para las solicitudes PUT, verificamos que el endpoint incluya un ID para actualizar un producto específico utilizando los datos proporcionados en los argumentos.
     console.log("Handling PUT request");
     if (id != undefined && id != '') {
       console.log(`Updating product with ID: ${id}...`);
@@ -115,6 +124,7 @@ else if (id != undefined && id != '' )  {
     break;
 
   case "DELETE":
+    // Para las solicitudes DELETE, verificamos que el endpoint incluya un ID para eliminar un producto específico.
     console.log("Handling DELETE request");
     if (id != undefined && id != '') {
       console.log(`Deleting product with ID: ${id}...`);
@@ -136,5 +146,6 @@ else if (id != undefined && id != '' )  {
     break;
 
   default:
+    // Si el método HTTP no coincide con ninguno de los casos anteriores, mostramos un mensaje indicando que el método es desconocido.
     console.log("Unknown method");
 }
