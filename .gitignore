@@ -1,1 +1,19 @@
-node_modules
+# Ignorar archivos y carpetas específicas
+# Dependencias (Nunca se suben, pesan mucho)
+node_modules/
+
+# Secretos y Configuración Local (CRÍTICO)
+.env
+*.json
+!package.json
+!package-lock.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Sistema Operativo (Para que no se suban archivos de basura de Ubuntu/Mac/Win)
+.DS_Store
+thumbs.db
