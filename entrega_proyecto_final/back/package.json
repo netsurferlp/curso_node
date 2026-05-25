@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev" : "node --watch src/index.js"
+    "dev": "node --watch src/index.js"
   },
   "keywords": [],
   "author": "Pessolano Gaston",
@@ -15,6 +15,7 @@
   "packageManager": "pnpm@10.15.1",
   "dependencies": {
     "body-parser": "^2.2.2",
+    "chalk": "^5.6.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
