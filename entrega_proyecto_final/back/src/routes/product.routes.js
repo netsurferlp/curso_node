@@ -1,0 +1,34 @@
+import express from "express";
+const router = express.Router();
+
+//GET /api/products - Obtener todos los productos
+router.get("/products", (req, res) => {
+  res.send("lista de todos los productos");
+});
+
+//GET /api/products/:id - Obtener un producto por su ID
+router.get("/products/:id", (req, res) => {
+  res.send(`Detalles del producto con ID: ${req.params.id}`);
+});
+
+//POST /api/products/create - Crear un nuevo producto
+router.post("/products/create", (req, res) => {
+  res.send("Producto creado con éxito");
+});
+
+//PUT /api/products/:id - Actualizar un producto existente
+router.put("/products/:id", (req, res) => {
+  res.send(`Producto con ID: ${req.params.id} actualizado`);
+});
+
+//PATCH /api/products/:id - Actualizar parcialmente un producto
+router.patch("/products/:id", (req, res) => {
+  res.send(`Producto con ID: ${req.params.id} actualizado parcialmente`);
+});
+
+//DELETE /api/products/:id - Eliminar un producto por su ID
+router.delete("/products/:id", (req, res) => {
+  res.send(`Producto con ID: ${req.params.id} eliminado`);
+});
+
+export default router;
