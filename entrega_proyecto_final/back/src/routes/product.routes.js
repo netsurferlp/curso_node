@@ -1,6 +1,22 @@
 import express from "express";
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
+import { getProducts, getProductById, createProduct, updateProduct, deleteProduct } from "../controllers/product.controller.js";  
+
+
+//Prefijo de ruta: /api/products
+
+
+router.get("/", getProducts); // Obtener todos los productos
+router.get("/:id", getProductById); // Obtener un producto por su ID
+router.post("/", createProduct); // Crear un nuevo producto
+//router.put("/:id", updateProduct); // Actualizar un producto existente
+router.delete("/:id", deleteProduct); // Eliminar un producto por su ID 
+
+
+
+/*
 //GET /api/products - Obtener todos los productos
 router.get("/products", (req, res) => {
   res.send("lista de todos los productos");
@@ -30,5 +46,8 @@ router.patch("/products/:id", (req, res) => {
 router.delete("/products/:id", (req, res) => {
   res.send(`Producto con ID: ${req.params.id} eliminado`);
 });
+
+*/
+
 
 export default router;
