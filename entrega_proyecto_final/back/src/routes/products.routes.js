@@ -2,7 +2,11 @@ import express from "express";
 import { Router } from "express";
 const router = Router();
 
-import { getProducts, getProductById, createProduct, updateProduct, deleteProduct } from "../controllers/product.controller.js";  
+import { getProducts, 
+  getProductById,
+   createProduct,
+    /*updateProduct,*/ 
+    deleteProduct } from "../controllers/products.controller.js";  
 
 
 //Prefijo de ruta: /api/products
