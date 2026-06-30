@@ -1,7 +1,7 @@
 {
   "name": "proyecto_final",
   "version": "1.0.0",
-  "description": "",
+  "description": "API_Proyecto_Final",
   "main": "index.js",
   "type": "module",
   "scripts": {
