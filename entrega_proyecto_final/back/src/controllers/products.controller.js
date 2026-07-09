@@ -1,22 +1,21 @@
 
-import { fetchProducts} from "../models/product.js";
+import { createProductModel, getProductsModel, getProductByIdModel, deleteProductModel} from "../models/product.js";
 
 export const getProducts = async (req, res) => {
-    const products = await fetchProducts();
+    const products = await getProductsModel();
     res.json(products);
 };
 
-export const getProductById = (req, res) => {
+export const getProductById = async (req, res) => {
     
-    const id = Number(req.params.id);
+    const { id } = req.params;
 
-    const product = products.find(product => product.id === id);
+    const product = await getProductByIdModel(id);
 
     if (!product) {
-        return res.status(404).json({message: 'Producto no encontrado',
-
-        });
+        return res.status(404).json({message: 'Producto no encontrado',});
     }
+
     res.json(product);
 };
 
@@ -24,37 +23,31 @@ export const getProductById = (req, res) => {
 
 
 
-export const createProduct = (req, res) => {
+export const createProduct = async (req, res) => {
     const {name, price} = req.body;
+
     if (!name || !price) {
-        return res.status(400).json({message: 'Nombre y precio son requeridos',});
+        return res.status(422).json({message: 'Nombre y precio son requeridos',});
     }
-    const newProduct = {
-        id: products.length + 1,
-        name,
-        price,
-    };
-    products.push(newProduct);
+    const newProduct = await createProductModel({ name, price, });
+
     res.status(201).json(newProduct);
 
 };
 
-export const deleteProduct = (req, res) => {
-    const id = Number(req.params.id);
-    const productIndex = products.findIndex(product => product.id === id);
+export const deleteProduct = async (req, res) => {
+    const { id } = req.params;
+    const deletedProduct = await deleteProductModel(id);
 
-    if (productIndex === -1) {
+    if (!deletedProduct) {
         return res.status(404).json({message: 'Producto no encontrado',});
     }
 
 
-
- const deleteProduct = products.splice(productIndex, 1);
-
 res.json({
     
     message: 'Producto eliminado',
-    product: deleteProduct[0],  
+    product: deletedProduct,  
 });
 
 };

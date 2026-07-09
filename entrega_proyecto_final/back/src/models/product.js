@@ -13,12 +13,12 @@ const productsCollection = collection(db, "products");
 
 //CRUD -C=Create, R=Read, U=Update, D=Delete
 
-export const createProduct = async (product) => {
+export const createProductModel = async (product) => {
   const productRef = await addDoc(productsCollection, product);
   return { id: productRef.id, ...product };
 };
 
-export const getProducts = async () => {
+export const getProductsModel = async () => {
   const snapshot = await getDocs(productsCollection);
 
   const products = [];
@@ -32,7 +32,7 @@ export const getProducts = async () => {
   return products;
 };
 
-export const getProductById = async (id) => {
+export const getProductByIdModel = async (id) => {
   const productRef = doc(productsCollection, id);
   const snapshot = await getDoc(productRef);
 
@@ -46,7 +46,7 @@ export const getProductById = async (id) => {
   };
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProductModel = async (id) => {
   const productRef = doc(productsCollection, id);
   const snapshot = await getDoc(productRef);
 
