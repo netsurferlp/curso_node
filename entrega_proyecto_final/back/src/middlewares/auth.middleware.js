@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
+import jwt from "jsonwebtoken";
 
 export const auth = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -23,6 +24,8 @@ export const auth = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(403).json({ message: "Token de autenticación inválido" });
+    return res
+      .status(403)
+      .json({ message: "Token de autenticación inválido sin firmar" });
   }
 };

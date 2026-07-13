@@ -11,7 +11,7 @@ import {
 
 import { auth } from "../middlewares/auth.middleware.js";
 
-//Prefijo de ruta: /api/products
+//Prefijo de ruta: /api/
 
 router.get("/", getProducts); // Obtener todos los productos
 router.get("/:id", getProductById); // Obtener un producto por su ID
