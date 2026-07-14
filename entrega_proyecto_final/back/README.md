@@ -70,3 +70,10 @@ Organizar el código de forma modular y escalable:
 - Configurar **JSON Web Tokens** en el proyecto.
 - Crear un middleware de autenticación para proteger las rutas de administración.
 - Implementar la lógica en el controlador de login para validar la identidad y emitir el token.
+- user admin.
+- email `admin@example.com`
+
+### 8. Deploy en Servidor Dedicado Propio
+
+- Utilice mi servidor LAMP <http://www.netsurferlp.com.ar:5000>
+- El puerto es el 5000.

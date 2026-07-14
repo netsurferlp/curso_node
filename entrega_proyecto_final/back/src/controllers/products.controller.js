@@ -16,7 +16,7 @@ export const getProductById = async (req, res) => {
   const product = await getProductByIdModel(id);
 
   if (!product) {
-    return res.status(404).json({ message: "Producto no encontrado" });
+    return res.status(404).json({ message: "❌ Producto no encontrado" });
   }
 
   res.json(product);
