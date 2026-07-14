@@ -50,6 +50,11 @@ Definir los siguientes puntos de entrada:
 
 - `POST /auth/login`: Valida credenciales y devuelve un **Bearer Token**.
 
+#### CREDENCIALES
+
+- email `admin@example.com`
+- password admin123
+
 ### 5. Arquitectura Basada en Capas
 
 Organizar el código de forma modular y escalable:
@@ -70,8 +75,6 @@ Organizar el código de forma modular y escalable:
 - Configurar **JSON Web Tokens** en el proyecto.
 - Crear un middleware de autenticación para proteger las rutas de administración.
 - Implementar la lógica en el controlador de login para validar la identidad y emitir el token.
-- user admin.
-- email `admin@example.com`
 
 ### 8. Deploy en Servidor Dedicado Propio
 
