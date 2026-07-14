@@ -8,13 +8,13 @@ export const auth = (req, res, next) => {
   if (!authHeader) {
     return res
       .status(401)
-      .json({ message: "No se proporcionó un token de autenticación" });
+      .json({ message: " ❌ No se proporcionó un token de autenticación" });
   }
 
   const token = authHeader.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({ message: "Token de autenticación inválido" });
+    return res.status(401).json({ message: " ❌ Token de autenticación inválido" });
   }
 
   try {
@@ -26,6 +26,6 @@ export const auth = (req, res, next) => {
   } catch (error) {
     return res
       .status(403)
-      .json({ message: "Token de autenticación inválido sin firmar" });
+      .json({ message: " ❌ Token de autenticación inválido sin firmar" });
   }
 };
